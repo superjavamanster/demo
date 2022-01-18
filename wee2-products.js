@@ -1,5 +1,5 @@
 // 1 建立Vue環境,使用ESM
-import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.1.4/vue.esm-browser.min.js';
+import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.6/vue.esm-browser.min.js';
 // 2 建立實體
 // 3 掛載
 const app = createApp({
