@@ -14,11 +14,12 @@ const app = createApp({
       login() {
         const api = 'https://vue3-course-api.hexschool.io/v2/admin/signin';
         axios.post(api, this.user).then((response) => {
-          const { token, expired } = response.data;
-          // 寫入 cookie token
-          // expires 設置有效時間
-          document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/supergoldmanster`;
-          window.location = 'wee2-products.html';
+          console.log(response);
+          // const { token, expired } = response.data;
+          // // 寫入 cookie token
+          // // expires 設置有效時間
+          // document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/supergoldmanster`;
+          // window.location = 'products.html';
         }).catch((error) => {
           alert(error.data.message);
         });

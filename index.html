@@ -10,8 +10,8 @@
 <body>
     <div id="app">
         <div class="big">
-      
-          <form>
+          <p>請先登入</p>
+          <form @submit.prevent="login">
       
             <input type="email" v-model="user.username" placeholder="xxxx@sss.com">
             <label>Email address</label>
