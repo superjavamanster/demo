@@ -12,11 +12,12 @@ createApp({
     login() {
       const api = 'https://vue3-course-api.hexschool.io/v2/admin/signin';
       axios.post(api, this.user).then((response) => {
-        // const { token, expired } = response.data;
-        // // 寫入 cookie token
-        // // expires 設置有效時間
-        // document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
-        // window.location = 'products.html';
+        // 確認API 連接是否ok 使用 console.log();
+        const { token, expired } = response.data;
+        // 寫入 cookie token
+        // expires 設置有效時間
+        document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
+        window.location = 'week2-products.html';
       }).catch((error) => {
         alert(error.data.message);
       });
