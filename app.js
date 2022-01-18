@@ -17,7 +17,7 @@ const app = createApp({
           const { token, expired } = response.data;
           // 寫入 cookie token
           // expires 設置有效時間
-          document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
+          document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/supergoldmanster`;
           window.location = 'week2-products.html';
         }).catch((error) => {
           alert(error.data.message);
