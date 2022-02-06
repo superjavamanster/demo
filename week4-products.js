@@ -1,10 +1,14 @@
 // 1 建立Vue環境,使用ESM
 import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.9/vue.esm-browser.js';
-
+import pagination from './pagination.js';  // pagination 區域元件匯入
 let productModal = null;
 let delProductModal = null;
 // 2 建立實體
 const app = createApp({
+  // pagination 區域元件註冊
+  components: {
+    pagination
+  },
   data() {
     return {
       apiUrl: 'https://vue3-course-api.hexschool.io/v2',
@@ -14,6 +18,7 @@ const app = createApp({
       temp: {
         imagesUrl: [], // 定義modal 視窗開啟關閉
       },
+      pagination: {},
     }
   },
   mounted() {
@@ -43,14 +48,20 @@ const app = createApp({
           window.location = 'login.html';
         })
     },
-    //渲染
-    getData() {
-      const url = `${this.apiUrl}/api/${this.apiPath}/admin/products/all`;// 定義getData API
-      axios.get(url).then((response) => {
-        this.products = response.data.products;
-      }).catch((err) => {
-        alert(err.data.message);
-      })
+    //渲染 (作業看到8:21分)
+    getData(page = 1) { //page 預設值設定為1,如果沒有設定則會出現undefine
+      // 定義getData API路徑選多頁
+      const url = `${this.apiUrl}/api/${this.apiPath}/admin/products?page=${page}`;
+
+      axios.get(url)
+        .then((response) => {
+          const { products, pagination } = response.data;
+          this.products = products;
+          this.pagination = pagination;
+        }).catch((err) => {
+          alert(err.data.message);
+          window.location = 'index.html';
+        })
     },
     //編輯
     updateProduct() {
