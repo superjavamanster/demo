@@ -1,5 +1,5 @@
 export default {
-   props: ['pages'], // 外層傳入內層-傳入page資訊 還有第10,11行  (作業看到30:21分)
+   props: ['pages'], // 外層傳入內層-傳入page資訊 還有第10,11行  (作業看到30:21-34:36-37:19分)
    // 第6,11,12,13,14,16行 套用bootstrap pagination樣式
    // 頁面切換事件 第16行@click="$emit('get-data', page)">{{page}}</a> 
    template: `<nav aria-label="Page navigation example">

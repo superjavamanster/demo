@@ -63,24 +63,7 @@ const app = createApp({
           window.location = 'index.html';
         })
     },
-    //編輯
-    updateProduct() {
-      let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
-      let http = 'post';
-
-      if (!this.isNew) {
-        url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
-        http = 'put'
-      }
-
-      axios[http](url, { data: this.temp }).then((response) => {
-        alert(response.data.message);
-        productModal.hide();
-        this.getData();
-      }).catch((err) => {
-        alert(err.data.message);
-      })
-    },
+    
     //打開modal
     openModal(isNew, item) {
       if (isNew === 'new') {
@@ -117,5 +100,31 @@ const app = createApp({
     },
   },
 });
+// 建立 全域 modal編輯元件
+app.component('productModal',{
+  props: ['temp'],
+  template: '#templateForProductModal',
+  methods: {
+    //編輯
+    updateProduct() {
+      let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
+      let httpMethod = 'post';
+
+      if (!this.isNew) {
+        url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
+        httpMethod = 'put'
+      }
+
+      axios[httpMethod](url, { data: this.temp }).then((response) => {
+        alert(response.data.message);
+        productModal.hide();
+        // this.getData(); // 沒有 getData(外層的方法)
+        this.$emit('getData')
+      }).catch((err) => {
+        alert(err.data.message);
+      })
+    },
+  }
+})
 // 3 掛載
 app.mount('#app');
