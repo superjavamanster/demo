@@ -48,7 +48,7 @@ const app = createApp({
           window.location = 'login.html';
         })
     },
-    //渲染 (作業看到8:21分)
+    //渲染 
     getData(page = 1) { //page 預設值設定為1,如果沒有設定則會出現undefine
       // 定義getData API路徑選多頁
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products?page=${page}`;
