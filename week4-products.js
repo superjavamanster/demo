@@ -93,7 +93,7 @@ const app = createApp({
         alert(err.data.message);
       })
     },
-    //建立新產品
+    //建立新產品圖片
     createImages() {
       this.temp.imagesUrl = [];
       this.temp.imagesUrl.push('');
@@ -101,15 +101,22 @@ const app = createApp({
   },
 });
 // 建立 全域 modal編輯元件
-app.component('productModal',{
-  props: ['temp'],
+app.component('productModal', {
+  props: ['temp', 'isNew'], //新增
   template: '#templateForProductModal',
-  methods: {
+  // 新增
+  data() {
+    return {
+      apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+      apiPath: 'supergoldmanster',
+    };
+  },
+    methods: {
     //編輯
     updateProduct() {
       let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
       let httpMethod = 'post';
-
+      // console.log(this.isNew);
       if (!this.isNew) {
         url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
         httpMethod = 'put'
@@ -119,11 +126,12 @@ app.component('productModal',{
         alert(response.data.message);
         productModal.hide();
         // this.getData(); // 沒有 getData(外層的方法)
-        this.$emit('getData')
+        this.$emit('get-data')
       }).catch((err) => {
         alert(err.data.message);
       })
     },
+    
   }
 })
 // 3 掛載
