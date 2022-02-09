@@ -100,23 +100,19 @@ const app = createApp({
         delProductModal.show()
       }
     },
-    // 刪除產品
-    delProduct() {
-      const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
+    // // 刪除產品
+    // delProduct() {
+    //   const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
 
-      axios.delete(url).then((response) => {
-        alert(response.data.message);
-        delProductModal.hide();
-        this.getData();
-      }).catch((err) => {
-        alert(err.data.message);
-      })
-    },
-    //建立新產品圖片
-    createImages() {
-      this.temp.imagesUrl = [];
-      this.temp.imagesUrl.push('');
-    },
+    //   axios.delete(url).then((response) => {
+    //     alert(response.data.message);
+    //     delProductModal.hide();
+    //     this.getData();
+    //   }).catch((err) => {
+    //     alert(err.data.message);
+    //   })
+    // },
+    
   },
 });
 // 建立 全域 modal編輯元件
@@ -150,8 +146,49 @@ app.component('productModal', {
         alert(err.data.message);
       })
     },
-    
+    //建立新產品圖片
+    createImages() {
+      this.temp.imagesUrl = [];
+      this.temp.imagesUrl.push('');
+    },
   }
 })
+
+// 建立 全域 del元件
+app.component('delProductModal',{
+  data () {
+    return {
+      apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+      apiPath: 'supergoldmanster',
+    };
+  },
+  props: ['temp'],
+  template: '#delProductModal',
+  mounted() {
+    delProductModal = new bootstrap.Modal(document.getElementById('delProductModal'), {
+      keyboard: false,
+      backdrop: 'static',
+    });
+  },
+  methods: {
+    delProduct() {
+      
+      axios.delete(`${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`).then((response) => {
+        this.hideModal();
+        this.$emit('get-data');
+      }).catch((error) => {
+        alert(error.data.message);
+      });
+    },
+    openModal() {
+      delProductModal.show();
+    },
+    hideModal() {
+      delProductModal.hide();
+    },
+  },
+})
+
+
 // 3 掛載
 app.mount('#app');

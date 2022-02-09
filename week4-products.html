@@ -72,6 +72,7 @@
             </tr>
           </tbody>
         </table>
+        
         <!-- 內層pages  外層pagination :pages="pagination"-->
         <!-- 內層get-data  外層getData  @get-data="getData"-->
         <pagination :pages="pagination" @get-data="getData"></pagination>
@@ -86,33 +87,14 @@
           v-on:get-Data="getData"
           :is-new="isNew"
         ></product-modal>
+        
         <!--綁定product modal編輯元件-->
       </div>
-      <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
-        aria-labelledby="delProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content border-0">
-            <div class="modal-header bg-danger text-white">
-              <h5 id="delProductModalLabel" class="modal-title">
-                <span>刪除產品</span>
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              是否刪除
-              <strong class="text-danger">{{ temp.title }}</strong> 商品(刪除後將無法恢復)。
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                取消
-              </button>
-              <button type="button" class="btn btn-danger" @click="delProduct">
-                確認刪除
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <del-product-modal
+          :temp="temp"
+          v-on:get-Data="getData"
+        
+        ></del-product-modal>
       <!-- Modal -->
     </div>
     <script type="text/x-template" id="templateForProductModal">
@@ -227,6 +209,33 @@
             </div>
           </div>
         </div> 
+    </script >
+    <script type="text/x-template" id="delProductModal">
+      <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
+        aria-labelledby="delProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content border-0">
+            <div class="modal-header bg-danger text-white">
+              <h5 id="delProductModalLabel" class="modal-title">
+                <span>刪除產品</span>
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              是否刪除
+              <strong class="text-danger">{{ temp.title }}</strong> 商品(刪除後將無法恢復)。
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                取消
+              </button>
+              <button type="button" class="btn btn-danger" @click="delProduct">
+                確認刪除
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
       integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
