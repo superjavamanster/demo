@@ -63,7 +63,26 @@ const app = createApp({
           window.location = 'index.html';
         })
     },
-    
+    // 這個試試看220229 11:54
+    // updateProduct() {
+    //   let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
+    //   let httpMethod = 'post';
+    //   // console.log(this.isNew);
+    //   if (!this.isNew) {
+    //     url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
+    //     httpMethod = 'put'
+    //   }
+
+    //   axios[httpMethod](url, { data: this.temp }).then((response) => {
+    //     alert(response.data.message);
+    //     productModal.hide();
+    //     // this.getData(); // 沒有 getData(外層的方法)
+    //     this.$emit('get-data')
+    //   }).catch((err) => {
+    //     alert(err.data.message);
+    //   })
+    // },
+    //
     //打開modal
     openModal(isNew, item) {
       if (isNew === 'new') {
@@ -116,7 +135,7 @@ app.component('productModal', {
     updateProduct() {
       let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
       let httpMethod = 'post';
-      // console.log(this.isNew);
+      console.log('updateProduct', this.isNew);
       if (!this.isNew) {
         url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.temp.id}`;
         httpMethod = 'put'
